@@ -7,6 +7,8 @@ import {
 
 import { colors, typography } from "./src/theme"
 
+import { Icon } from "@/components/shared/icon"
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Lato_400Regular,
@@ -20,6 +22,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+        <Icon name="tag" color={colors.white} />
         <Text style={styles.buttonText}>Button</Text>
       </TouchableOpacity>
     </View>
@@ -34,11 +37,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
     backgroundColor: colors.purple.base,
     paddingVertical: 12,
     paddingHorizontal: 24,
-    alignItems: "center",
-    justifyContent: "center",
     borderRadius: 9999,
   },
   buttonText: {
