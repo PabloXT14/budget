@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar"
 import { NavigationContainer } from "@react-navigation/native"
 import {
   Lato_400Regular,
@@ -6,7 +7,6 @@ import {
 } from "@expo-google-fonts/lato"
 
 import { AppRoutes } from "./app-routes"
-import { StatusBar } from "expo-status-bar"
 
 export const Routes = () => {
   const [fontsLoaded] = useFonts({

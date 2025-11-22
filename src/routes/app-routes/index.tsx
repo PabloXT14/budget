@@ -27,7 +27,10 @@ export type AppRoutesProps<T extends keyof AppRoutesList> = StackScreenProps<
 const { Navigator, Screen } = createStackNavigator<AppRoutesList>()
 
 export const AppRoutes = () => (
-  <Navigator initialRouteName="home" screenOptions={{ headerShown: false }}>
+  <Navigator
+    initialRouteName="home"
+    screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+  >
     <Screen name="home" component={Home} />
     <Screen name="details" component={Details} />
     <Screen name="createEditBudget" component={CreateEditBudget} />
