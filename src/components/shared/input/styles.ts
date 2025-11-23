@@ -6,7 +6,7 @@ import { colors, typography } from "@/theme"
 export const styles = StyleSheet.create({
   /* Container */
   container: {
-    width: "100%",
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
@@ -25,9 +25,10 @@ export const styles = StyleSheet.create({
   containerDanger: {
     borderColor: colors.danger.base,
   },
+
   /* Field */
   field: {
-    width: "100%",
+    flex: 1,
     padding: 0,
     margin: 0,
 

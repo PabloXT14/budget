@@ -9,9 +9,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    gap: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
+    padding: 12,
     borderRadius: 9999,
     borderWidth: 1,
   },
@@ -36,6 +34,7 @@ export const styles = StyleSheet.create({
   textBase: {
     fontSize: typography.title.sm.size,
     fontFamily: typography.title.sm.weight,
+    paddingHorizontal: 8,
   },
 
   textPrimary: {
