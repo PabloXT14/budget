@@ -7,6 +7,7 @@ import { colors } from "@/theme"
 
 import { Header } from "./components/header"
 import { Search } from "./components/search"
+import { BudgetList } from "./components/budget-list"
 
 export const Home = (_props: AppRoutesProps<"home">) => (
   <SafeAreaView style={styles.container}>
@@ -14,6 +15,8 @@ export const Home = (_props: AppRoutesProps<"home">) => (
 
     <View style={styles.content}>
       <Search />
+
+      <BudgetList />
     </View>
   </SafeAreaView>
 )

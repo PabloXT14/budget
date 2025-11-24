@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native"
 
 import { colors, typography } from "@/theme"
 
-import type { StatusVariant } from "."
+import { BudgetStatus } from "@/@types/budget"
 
 export const styles = StyleSheet.create({
   base: {
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.success.light,
   },
 
-  declined: {
+  reject: {
     backgroundColor: colors.danger.light,
   },
 
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.success.base,
   },
 
-  indicatorDeclined: {
+  indicatorReject: {
     backgroundColor: colors.danger.base,
   },
 
@@ -74,37 +74,37 @@ export const styles = StyleSheet.create({
     color: colors.success.dark,
   },
 
-  textDeclined: {
+  textReject: {
     color: colors.danger.dark,
   },
 })
 
-export function getStatusStyles(status: StatusVariant) {
+export function getStatusStyles(status: BudgetStatus) {
   return [
     styles.base,
-    status === "sent" && styles.sent,
-    status === "draft" && styles.draft,
-    status === "approved" && styles.approved,
-    status === "declined" && styles.declined,
+    status === BudgetStatus.SENT && styles.sent,
+    status === BudgetStatus.DRAFT && styles.draft,
+    status === BudgetStatus.APPROVED && styles.approved,
+    status === BudgetStatus.REJECTED && styles.reject,
   ]
 }
 
-export function getIndicatorStyles(status: StatusVariant) {
+export function getIndicatorStyles(status: BudgetStatus) {
   return [
     styles.indicatorBase,
-    status === "sent" && styles.indicatorSent,
-    status === "draft" && styles.indicatorDraft,
-    status === "approved" && styles.indicatorApproved,
-    status === "declined" && styles.indicatorDeclined,
+    status === BudgetStatus.SENT && styles.indicatorSent,
+    status === BudgetStatus.DRAFT && styles.indicatorDraft,
+    status === BudgetStatus.APPROVED && styles.indicatorApproved,
+    status === BudgetStatus.REJECTED && styles.indicatorReject,
   ]
 }
 
-export function getTextStyles(status: StatusVariant) {
+export function getTextStyles(status: BudgetStatus) {
   return [
     styles.textBase,
-    status === "sent" && styles.textSent,
-    status === "draft" && styles.textDraft,
-    status === "approved" && styles.textApproved,
-    status === "declined" && styles.textDeclined,
+    status === BudgetStatus.SENT && styles.textSent,
+    status === BudgetStatus.DRAFT && styles.textDraft,
+    status === BudgetStatus.APPROVED && styles.textApproved,
+    status === BudgetStatus.REJECTED && styles.textReject,
   ]
 }

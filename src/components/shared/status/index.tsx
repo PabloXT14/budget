@@ -2,23 +2,16 @@ import { Text, View } from "react-native"
 
 import { getStatusStyles, getIndicatorStyles, getTextStyles } from "./styles"
 
-export type StatusVariant = "sent" | "draft" | "approved" | "declined"
+import type { BudgetStatus } from "@/@types/budget"
 
 type StatusProps = {
-  variant: StatusVariant
-}
-
-const STATUS_TITLE: Record<StatusVariant, string> = {
-  sent: "Enviado",
-  draft: "Rascunho",
-  approved: "Aprovado",
-  declined: "Recusado",
+  variant: BudgetStatus
 }
 
 export const Status = ({ variant }: StatusProps) => (
   <View style={getStatusStyles(variant)}>
     <View style={getIndicatorStyles(variant)} />
 
-    <Text style={getTextStyles(variant)}>{STATUS_TITLE[variant]}</Text>
+    <Text style={getTextStyles(variant)}>{variant}</Text>
   </View>
 )
