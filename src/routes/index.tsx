@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar"
 import { NavigationContainer } from "@react-navigation/native"
 import {
   Lato_400Regular,
@@ -19,12 +18,8 @@ export const Routes = () => {
   }
 
   return (
-    <>
-      <StatusBar style="dark" />
-
-      <NavigationContainer>
-        <AppRoutes />
-      </NavigationContainer>
-    </>
+    <NavigationContainer>
+      <AppRoutes />
+    </NavigationContainer>
   )
 }

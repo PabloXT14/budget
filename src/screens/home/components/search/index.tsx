@@ -7,9 +7,12 @@ import { styles } from "./styles"
 import { Button } from "@/components/shared/button"
 import { Icon } from "@/components/shared/icon"
 import { Input } from "@/components/shared/input"
+import { useBottomSheet } from "@/contexts/bottom-sheet.context"
 
 export const Search = () => {
   const [isInputFocused, setIsInputFocused] = useState(false)
+
+  const { openBottomSheet } = useBottomSheet()
 
   return (
     <View style={styles.container}>
@@ -26,7 +29,12 @@ export const Search = () => {
         />
       </Input.Container>
 
-      <Button variant="secondary">
+      <Button
+        variant="secondary"
+        onPress={() => {
+          openBottomSheet(<View />, 1)
+        }}
+      >
         <Icon name="filter" size={24} color={colors.purple.base} />
       </Button>
     </View>
