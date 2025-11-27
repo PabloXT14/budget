@@ -7,7 +7,7 @@ import { styles } from "./styles"
 
 type CheckboxProps = {
   value: boolean
-  onValueChange: () => void
+  onValueChange?: () => void
 }
 
 export const Checkbox = ({ value, onValueChange }: CheckboxProps) => (

@@ -4,10 +4,12 @@ import { View } from "react-native"
 import { colors } from "@/theme"
 import { styles } from "./styles"
 
+import { useBottomSheet } from "@/contexts/bottom-sheet.context"
+
 import { Button } from "@/components/shared/button"
 import { Icon } from "@/components/shared/icon"
 import { Input } from "@/components/shared/input"
-import { useBottomSheet } from "@/contexts/bottom-sheet.context"
+import { Filter } from "../filter"
 
 export const Search = () => {
   const [isInputFocused, setIsInputFocused] = useState(false)
@@ -32,7 +34,7 @@ export const Search = () => {
       <Button
         variant="secondary"
         onPress={() => {
-          openBottomSheet(<View />, 1)
+          openBottomSheet(<Filter />, 1)
         }}
       >
         <Icon name="filter" size={24} color={colors.purple.base} />
