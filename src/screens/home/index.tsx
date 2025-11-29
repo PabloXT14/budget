@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 24,
     paddingHorizontal: 20,
-    paddingVertical: 24,
+    paddingTop: 24,
   },
 })
