@@ -7,6 +7,7 @@ import { colors } from "@/theme"
 import { BUDGETS } from "@/data/budgets"
 
 import { Header } from "./components/header"
+import { BudgetInfo } from "./components/budget-info"
 import { Footer } from "./components/footer"
 
 export const Details = ({ route }: AppRoutesProps<"details">) => {
@@ -23,7 +24,12 @@ export const Details = ({ route }: AppRoutesProps<"details">) => {
       <Header budgetId={budget.id} status={budget.status} />
 
       {/* CONTENT */}
-      <ScrollView contentContainerStyle={styles.content} />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
+        <BudgetInfo data={budget} />
+      </ScrollView>
 
       <Footer />
     </SafeAreaView>
@@ -36,6 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   content: {
-    flex: 1,
+    flexGrow: 1,
+    padding: 20,
   },
 })
