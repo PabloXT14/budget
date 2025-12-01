@@ -18,7 +18,8 @@ export enum BudgetStatus {
 
 export type BudgetItem = {
   id: string // Identificador único do item
+  title: string // Título do item
   description: string // Descrição do item
   quantity: number // Quantidade do item
-  unitPrice: number // Preço unitário do item
+  unitPriceInCents: number // Preço unitário do item
 }

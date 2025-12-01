@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from "react-native"
+import { ScrollView, StyleSheet, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import type { AppRoutesProps } from "@/routes/app-routes"
@@ -8,6 +8,7 @@ import { BUDGETS } from "@/data/budgets"
 
 import { Header } from "./components/header"
 import { BudgetInfo } from "./components/budget-info"
+import { ServicesList } from "./components/services-list"
 import { Footer } from "./components/footer"
 
 export const Details = ({ route }: AppRoutesProps<"details">) => {
@@ -29,6 +30,10 @@ export const Details = ({ route }: AppRoutesProps<"details">) => {
         contentContainerStyle={styles.content}
       >
         <BudgetInfo data={budget} />
+
+        <View style={styles.services}>
+          <ServicesList items={budget.items} />
+        </View>
       </ScrollView>
 
       <Footer />
@@ -43,6 +48,10 @@ const styles = StyleSheet.create({
   },
   content: {
     flexGrow: 1,
+    gap: 20,
     padding: 20,
+  },
+  services: {
+    gap: 8,
   },
 })

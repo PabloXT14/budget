@@ -13,6 +13,8 @@ import { Status } from "@/components/shared/status"
 import type { Budget } from "@/@types/budget"
 import type { AppRoutesList } from "@/routes/app-routes"
 
+const CENTS_TO_CURRENCY = 100
+
 type BudgetCardProps = TouchableOpacityProps & {
   data: Budget
 }
@@ -20,15 +22,20 @@ export const BudgetCard = ({ data, style, ...rest }: BudgetCardProps) => {
   const navigation = useNavigation<NavigationProp<AppRoutesList>>()
 
   const totalPrice = data.items.reduce(
-    (acc, item) => acc + item.quantity * item.unitPrice,
+    (acc, item) =>
+      acc + (item.quantity * item.unitPriceInCents) / CENTS_TO_CURRENCY,
     0
   )
+
+  const totalPriceWithDiscount = data.discountPercentage
+    ? totalPrice - totalPrice * data.discountPercentage
+    : totalPrice
 
   const formattedTotalPrice = Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
   })
-    .format(totalPrice)
+    .format(totalPriceWithDiscount)
     .replace("R$", "")
     .trim()
 
