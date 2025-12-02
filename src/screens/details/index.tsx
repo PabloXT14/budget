@@ -9,6 +9,7 @@ import { BUDGETS } from "@/data/budgets"
 import { Header } from "./components/header"
 import { BudgetInfo } from "./components/budget-info"
 import { ServicesList } from "./components/services-list"
+import { ServicesPrice } from "./components/services-price"
 import { Footer } from "./components/footer"
 
 export const Details = ({ route }: AppRoutesProps<"details">) => {
@@ -33,6 +34,11 @@ export const Details = ({ route }: AppRoutesProps<"details">) => {
 
         <View style={styles.services}>
           <ServicesList items={budget.items} />
+
+          <ServicesPrice
+            items={budget.items}
+            discountPercentage={budget.discountPercentage}
+          />
         </View>
       </ScrollView>
 

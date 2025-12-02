@@ -47,6 +47,7 @@ export const BUDGETS: Budget[] = [
     title: "Orçamento para consultoria em TI",
     client: "Empresa ABC",
     status: BudgetStatus.DRAFT,
+    discountPercentage: 0.2,
     items: [
       {
         id: randomUUID(),
