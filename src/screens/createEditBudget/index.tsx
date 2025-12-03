@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 import type { AppRoutesProps } from "@/routes/app-routes"
 
 import { colors } from "@/theme"
+import { Header } from "./header"
 
 export const CreateEditBudget = ({
   route,
@@ -10,9 +12,9 @@ export const CreateEditBudget = ({
   const { params } = route
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>CreateEditBudget {params?.budgetId}</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Header />
+    </SafeAreaView>
   )
 }
 
@@ -20,12 +22,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    color: colors.black,
-    fontSize: 20,
-    fontWeight: "bold",
   },
 })
