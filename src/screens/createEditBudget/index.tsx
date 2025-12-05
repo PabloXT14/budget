@@ -5,8 +5,8 @@ import type { AppRoutesProps } from "@/routes/app-routes"
 
 import { colors } from "@/theme"
 
-import { Header } from "./header"
-import { Info } from "./info"
+import { Header } from "./components/header"
+import { Info } from "./components/info"
 
 export const CreateEditBudget = ({
   route,
