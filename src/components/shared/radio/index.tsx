@@ -4,7 +4,7 @@ import { styles } from "./styles"
 
 type RadioProps = {
   value: boolean
-  onValueChange: () => void
+  onValueChange?: () => void
 }
 
 export const Radio = ({ value, onValueChange }: RadioProps) => (

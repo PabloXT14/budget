@@ -7,6 +7,7 @@ import { colors } from "@/theme"
 
 import { Header } from "./components/header"
 import { Info } from "./components/info"
+import { StatusSection } from "./components/status-section"
 
 export const CreateEditBudget = ({
   route,
@@ -23,6 +24,7 @@ export const CreateEditBudget = ({
         contentContainerStyle={styles.content}
       >
         <Info />
+        <StatusSection />
       </ScrollView>
     </SafeAreaView>
   )
