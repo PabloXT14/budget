@@ -8,11 +8,18 @@ import { colors } from "@/theme"
 import { Header } from "./components/header"
 import { Info } from "./components/info"
 import { StatusSection } from "./components/status-section"
+import { ServicesSection } from "./components/services-section"
+
+import { BUDGETS } from "@/data/budgets"
 
 export const CreateEditBudget = ({
   route,
 }: AppRoutesProps<"createEditBudget">) => {
   const { params } = route
+
+  const budgetId = params?.budgetId
+
+  const budget = BUDGETS.find((item) => item.id === budgetId)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,6 +32,7 @@ export const CreateEditBudget = ({
       >
         <Info />
         <StatusSection />
+        <ServicesSection services={BUDGETS[0].items} />
       </ScrollView>
     </SafeAreaView>
   )
