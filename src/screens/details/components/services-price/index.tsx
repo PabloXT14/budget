@@ -1,5 +1,6 @@
 import { Text, View } from "react-native"
 
+import { formatPrice } from "@/utils/format-price"
 import { colors } from "@/theme"
 import { styles } from "./styles"
 
@@ -25,25 +26,9 @@ export const ServicesPrice = ({
     0
   )
 
-  const subtotalFormatted = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(subtotal)
-
   const discount = subtotal * discountPercentage
-  const discountFormatted = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(discount)
 
   const total = subtotal - discount
-  const totalFormatted = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  })
-    .format(total)
-    .replace("R$", "")
-    .trim()
 
   return (
     <View style={styles.container}>
@@ -57,7 +42,9 @@ export const ServicesPrice = ({
           {/* SUBTOTAL */}
           <View style={styles.subtotal}>
             <Text style={styles.subtotalLabel}>Subtotal</Text>
-            <Text style={styles.subtotalValue}>{subtotalFormatted}</Text>
+            <Text style={styles.subtotalValue}>
+              {formatPrice({ price: subtotal })}
+            </Text>
           </View>
 
           {/* DISCOUNT */}
@@ -72,7 +59,9 @@ export const ServicesPrice = ({
               </View>
             </View>
 
-            <Text style={styles.discountValue}>- {discountFormatted}</Text>
+            <Text style={styles.discountValue}>
+              - {formatPrice({ price: discount })}
+            </Text>
           </View>
         </View>
 
@@ -83,7 +72,9 @@ export const ServicesPrice = ({
 
           <View style={styles.total}>
             <Text style={styles.currency}>R$</Text>
-            <Text style={styles.price}>{totalFormatted}</Text>
+            <Text style={styles.price}>
+              {formatPrice({ price: total, showSymbol: false })}
+            </Text>
           </View>
         </View>
       </View>

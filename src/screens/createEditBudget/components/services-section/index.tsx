@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity, View } from "react-native"
 
+import { formatPrice } from "@/utils/format-price"
 import { colors } from "@/theme"
 import { styles } from "./styles"
 
@@ -30,14 +31,6 @@ export const ServicesSection = ({ services }: ServicesSectionProps) => {
           const totalItemPrice =
             (item.unitPriceInCents * item.quantity) / CENTS_TO_CURRENCY
 
-          const formattedTotalPrice = Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          })
-            .format(totalItemPrice)
-            .replace("R$", "")
-            .trim()
-
           return (
             <View key={item.id} style={styles.item}>
               <View style={styles.info}>
@@ -52,7 +45,9 @@ export const ServicesSection = ({ services }: ServicesSectionProps) => {
               <View style={styles.price}>
                 <View style={styles.priceValue}>
                   <Text style={styles.currency}>R$</Text>
-                  <Text style={styles.value}>{formattedTotalPrice}</Text>
+                  <Text style={styles.value}>
+                    {formatPrice({ price: totalItemPrice, showSymbol: false })}
+                  </Text>
                 </View>
 
                 <Text style={styles.quantity}>Qt: {item.quantity}</Text>

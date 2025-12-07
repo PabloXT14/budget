@@ -6,6 +6,7 @@ import {
 } from "react-native"
 import { type NavigationProp, useNavigation } from "@react-navigation/native"
 
+import { formatPrice } from "@/utils/format-price"
 import { styles } from "./styles"
 
 import { Status } from "@/components/shared/status"
@@ -30,14 +31,6 @@ export const BudgetCard = ({ data, style, ...rest }: BudgetCardProps) => {
   const totalPriceWithDiscount = data.discountPercentage
     ? totalPrice - totalPrice * data.discountPercentage
     : totalPrice
-
-  const formattedTotalPrice = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  })
-    .format(totalPriceWithDiscount)
-    .replace("R$", "")
-    .trim()
 
   return (
     <TouchableOpacity
@@ -65,7 +58,7 @@ export const BudgetCard = ({ data, style, ...rest }: BudgetCardProps) => {
         <View style={styles.price}>
           <Text style={styles.priceCurrency}>R$</Text>
           <Text style={styles.priceValue} numberOfLines={1}>
-            {formattedTotalPrice}
+            {formatPrice({ price: totalPriceWithDiscount, showSymbol: false })}
           </Text>
         </View>
       </View>
