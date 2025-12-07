@@ -42,7 +42,7 @@ export const Details = ({ route }: AppRoutesProps<"details">) => {
         </View>
       </ScrollView>
 
-      <Footer />
+      <Footer budgetId={budget.id} />
     </SafeAreaView>
   )
 }

@@ -30,9 +30,9 @@ export const CreateEditBudget = ({
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
       >
-        <Info />
-        <StatusSection />
-        <ServicesSection services={BUDGETS[0].items} />
+        <Info title={budget?.title} client={budget?.client} />
+        <StatusSection status={budget?.status} />
+        <ServicesSection services={budget?.items} />
       </ScrollView>
     </SafeAreaView>
   )

@@ -9,9 +9,13 @@ import { BudgetStatus } from "@/@types/budget"
 import { Status } from "@/components/shared/status"
 import { Radio } from "@/components/shared/radio"
 
-export const StatusSection = () => {
+type StatusSectionProps = {
+  status?: BudgetStatus
+}
+
+export const StatusSection = ({ status }: StatusSectionProps) => {
   const [selectedStatus, setSelectedStatus] = useState<BudgetStatus>(
-    BudgetStatus.DRAFT
+    status ?? BudgetStatus.DRAFT
   )
 
   return (

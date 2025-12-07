@@ -1,4 +1,5 @@
 import { View } from "react-native"
+import { type NavigationProp, useNavigation } from "@react-navigation/native"
 
 import { Button, ButtonText } from "@/components/shared/button"
 import { Icon } from "@/components/shared/icon"
@@ -6,7 +7,15 @@ import { Icon } from "@/components/shared/icon"
 import { colors } from "@/theme"
 import { styles } from "./styles"
 
-export const Footer = () => {
+import type { AppRoutesList } from "@/routes/app-routes"
+
+type FooterProps = {
+  budgetId: string
+}
+
+export const Footer = ({ budgetId }: FooterProps) => {
+  const navigation = useNavigation<NavigationProp<AppRoutesList>>()
+
   return (
     <View style={styles.container}>
       {/* OPTIONS */}
@@ -17,7 +26,10 @@ export const Footer = () => {
         <Button variant="secondary">
           <Icon name="copy" size={24} color={colors.purple.base} />
         </Button>
-        <Button variant="secondary">
+        <Button
+          variant="secondary"
+          onPress={() => navigation.navigate("createEditBudget", { budgetId })}
+        >
           <Icon name="editPen" size={24} color={colors.purple.base} />
         </Button>
       </View>

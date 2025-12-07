@@ -7,7 +7,12 @@ import { styles } from "./styles"
 import { Icon } from "@/components/shared/icon"
 import { Input } from "@/components/shared/input"
 
-export const Info = () => {
+type InfoProps = {
+  title?: string
+  client?: string
+}
+
+export const Info = ({ title, client }: InfoProps) => {
   const [isTitleFocused, setIsInputFocused] = useState(false)
   const [isClientFocused, setIsClientFocused] = useState(false)
 
@@ -25,6 +30,7 @@ export const Info = () => {
         <Input.Container variant={isTitleFocused ? "focus" : "default"}>
           <Input.Field
             placeholder="Título"
+            defaultValue={title}
             variant={isTitleFocused ? "focus" : "default"}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
@@ -34,6 +40,7 @@ export const Info = () => {
         <Input.Container variant={isClientFocused ? "focus" : "default"}>
           <Input.Field
             placeholder="Cliente"
+            defaultValue={client}
             variant={isClientFocused ? "focus" : "default"}
             onFocus={() => setIsClientFocused(true)}
             onBlur={() => setIsClientFocused(false)}
