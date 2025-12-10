@@ -11,6 +11,7 @@ import { StatusSection } from "./components/status-section"
 import { ServicesSection } from "./components/services-section"
 
 import { BUDGETS } from "@/data/budgets"
+import { PriceSection } from "./components/price-section"
 
 export const CreateEditBudget = ({
   route,
@@ -33,6 +34,10 @@ export const CreateEditBudget = ({
         <Info title={budget?.title} client={budget?.client} />
         <StatusSection status={budget?.status} />
         <ServicesSection services={budget?.items} />
+        <PriceSection
+          services={budget?.items}
+          discountPercentage={budget?.discountPercentage}
+        />
       </ScrollView>
     </SafeAreaView>
   )
