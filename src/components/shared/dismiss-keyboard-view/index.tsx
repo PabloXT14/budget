@@ -5,13 +5,9 @@ const IOS_KEYBOARD_VERTICAL_OFFSET = 64
 
 type DismissKeyboardViewProps = {
   children: ReactNode
-  contentContainerStyle?: object
 }
 
-export const DismissKeyboardView = ({
-  children,
-  contentContainerStyle,
-}: DismissKeyboardViewProps) => (
+export const DismissKeyboardView = ({ children }: DismissKeyboardViewProps) => (
   <KeyboardAvoidingView
     style={{ flex: 1 }}
     behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -21,7 +17,7 @@ export const DismissKeyboardView = ({
   >
     <ScrollView
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={[{ flexGrow: 1 }, contentContainerStyle]}
+      contentContainerStyle={{ flexGrow: 1 }}
       keyboardShouldPersistTaps="handled"
     >
       {children}

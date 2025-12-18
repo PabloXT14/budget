@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import type { AppRoutesProps } from "@/routes/app-routes"
@@ -27,14 +27,16 @@ export const CreateEditBudget = ({
       <Header />
 
       {/* CONTENT */}
-      <DismissKeyboardView contentContainerStyle={styles.content}>
-        <Info title={budget?.title} client={budget?.client} />
-        <StatusSection status={budget?.status} />
-        <ServicesSection services={budget?.items} />
-        <PriceSection
-          services={budget?.items}
-          discountPercentage={budget?.discountPercentage}
-        />
+      <DismissKeyboardView>
+        <View style={styles.content}>
+          <Info title={budget?.title} client={budget?.client} />
+          <StatusSection status={budget?.status} />
+          <ServicesSection services={budget?.items} />
+          <PriceSection
+            services={budget?.items}
+            discountPercentage={budget?.discountPercentage}
+          />
+        </View>
       </DismissKeyboardView>
     </SafeAreaView>
   )
