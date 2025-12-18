@@ -1,17 +1,17 @@
-import { ScrollView, StyleSheet } from "react-native"
+import { StyleSheet } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import type { AppRoutesProps } from "@/routes/app-routes"
 
 import { colors } from "@/theme"
+import { BUDGETS } from "@/data/budgets"
 
 import { Header } from "./components/header"
 import { Info } from "./components/info"
 import { StatusSection } from "./components/status-section"
 import { ServicesSection } from "./components/services-section"
-
-import { BUDGETS } from "@/data/budgets"
 import { PriceSection } from "./components/price-section"
+import { DismissKeyboardView } from "@/components/shared/dismiss-keyboard-view"
 
 export const CreateEditBudget = ({
   route,
@@ -27,10 +27,7 @@ export const CreateEditBudget = ({
       <Header />
 
       {/* CONTENT */}
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
-      >
+      <DismissKeyboardView contentContainerStyle={styles.content}>
         <Info title={budget?.title} client={budget?.client} />
         <StatusSection status={budget?.status} />
         <ServicesSection services={budget?.items} />
@@ -38,7 +35,7 @@ export const CreateEditBudget = ({
           services={budget?.items}
           discountPercentage={budget?.discountPercentage}
         />
-      </ScrollView>
+      </DismissKeyboardView>
     </SafeAreaView>
   )
 }
