@@ -27,23 +27,19 @@ export const Info = ({ title, client }: InfoProps) => {
 
       {/* CONTENT */}
       <View style={styles.content}>
-        <Input.Container variant={isTitleFocused ? "focus" : "default"}>
+        <Input.Container isFocused={isTitleFocused}>
           <Input.Field
             placeholder="Título"
             defaultValue={title}
-            variant={isTitleFocused ? "focus" : "default"}
-            onFocus={() => setIsInputFocused(true)}
-            onBlur={() => setIsInputFocused(false)}
+            onFocusChange={setIsInputFocused}
           />
         </Input.Container>
 
-        <Input.Container variant={isClientFocused ? "focus" : "default"}>
+        <Input.Container isFocused={isClientFocused}>
           <Input.Field
             placeholder="Cliente"
             defaultValue={client}
-            variant={isClientFocused ? "focus" : "default"}
-            onFocus={() => setIsClientFocused(true)}
-            onBlur={() => setIsClientFocused(false)}
+            onFocusChange={setIsClientFocused}
           />
         </Input.Container>
       </View>

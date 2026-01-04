@@ -11,12 +11,14 @@ import {
 import { TouchableWithoutFeedback, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet"
+import type { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types"
 
 import { colors } from "@/theme"
 
 type BottomSheetContextType = {
   openBottomSheet: (content: ReactNode, index?: number) => void
   closeBottomSheet: () => void
+  bottomSheetRef: React.RefObject<BottomSheetMethods | null>
 }
 
 const BottomSheetContext = createContext<BottomSheetContextType>(
@@ -65,6 +67,7 @@ export const BottomSheetProvider = ({ children }: PropsWithChildren) => {
       value={{
         openBottomSheet,
         closeBottomSheet,
+        bottomSheetRef,
       }}
     >
       {children}

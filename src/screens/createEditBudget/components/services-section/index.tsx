@@ -7,7 +7,10 @@ import { styles } from "./styles"
 import { Icon } from "@/components/shared/icon"
 import { Button, ButtonText } from "@/components/shared/button"
 
+import { useBottomSheet } from "@/contexts/bottom-sheet.context"
+
 import type { BudgetItem } from "@/@types/budget"
+import { AddEditService } from "../add-edit-service"
 
 type ServicesSectionProps = {
   services?: BudgetItem[]
@@ -16,6 +19,8 @@ type ServicesSectionProps = {
 const CENTS_TO_CURRENCY = 100
 
 export const ServicesSection = ({ services }: ServicesSectionProps) => {
+  const { openBottomSheet } = useBottomSheet()
+
   return (
     <View style={styles.container}>
       {/* HEADER */}
@@ -60,7 +65,10 @@ export const ServicesSection = ({ services }: ServicesSectionProps) => {
           )
         })}
 
-        <Button variant="secondary">
+        <Button
+          variant="secondary"
+          onPress={() => openBottomSheet(<AddEditService />, 1)}
+        >
           <Icon name="plus" size={24} color={colors.purple.base} />
           <ButtonText variant="secondary">Adicionar serviço</ButtonText>
         </Button>

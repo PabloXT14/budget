@@ -18,16 +18,11 @@ export const Search = () => {
 
   return (
     <View style={styles.container}>
-      <Input.Container variant={isInputFocused ? "focus" : "default"}>
-        <Input.Icon
-          name="search"
-          variant={isInputFocused ? "focus" : "default"}
-        />
+      <Input.Container isFocused={isInputFocused}>
+        <Input.Icon name="search" isFocused={isInputFocused} />
         <Input.Field
           placeholder="Título ou cliente"
-          onFocus={() => setIsInputFocused(true)}
-          onBlur={() => setIsInputFocused(false)}
-          variant={isInputFocused ? "focus" : "default"}
+          onFocusChange={setIsInputFocused}
         />
       </Input.Container>
 

@@ -30,8 +30,11 @@ export const CreateEditBudget = ({
       <DismissKeyboardView>
         <View style={styles.content}>
           <Info title={budget?.title} client={budget?.client} />
+
           <StatusSection status={budget?.status} />
+
           <ServicesSection services={budget?.items} />
+
           <PriceSection
             services={budget?.items}
             discountPercentage={budget?.discountPercentage}
