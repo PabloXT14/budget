@@ -9,6 +9,7 @@ import { Info } from "./components/info"
 import { StatusSection } from "./components/status-section"
 import { ServicesSection } from "./components/services-section"
 import { PriceSection } from "./components/price-section"
+import { Footer } from "./components/footer"
 
 import type { useCreateBudgetViewModel } from "./use-create-budget-view-model"
 
@@ -17,10 +18,10 @@ type CreateBudgetViewProps = ReturnType<typeof useCreateBudgetViewModel>
 export const CreateBudgetView = ({ newBudget }: CreateBudgetViewProps) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
-
-      {/* CONTENT */}
       <DismissKeyboardView>
+        <Header />
+
+        {/* CONTENT */}
         <View style={styles.content}>
           <Info title={newBudget.title} client={newBudget.client} />
 
@@ -33,6 +34,8 @@ export const CreateBudgetView = ({ newBudget }: CreateBudgetViewProps) => {
             discountPercentage={newBudget.discountPercentage}
           />
         </View>
+
+        <Footer />
       </DismissKeyboardView>
     </SafeAreaView>
   )

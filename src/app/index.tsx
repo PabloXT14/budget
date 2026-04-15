@@ -10,9 +10,9 @@ export function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <BottomSheetProvider>
-          <StatusBar style="dark" />
-
           <Routes />
+
+          <StatusBar style="dark" />
         </BottomSheetProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

@@ -1,26 +1,22 @@
 import type { ReactNode } from "react"
-import { KeyboardAvoidingView, Platform, ScrollView } from "react-native"
-
-const IOS_KEYBOARD_VERTICAL_OFFSET = 64
+import { Keyboard, TouchableWithoutFeedback } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 
 type DismissKeyboardViewProps = {
   children: ReactNode
 }
 
 export const DismissKeyboardView = ({ children }: DismissKeyboardViewProps) => (
-  <KeyboardAvoidingView
-    style={{ flex: 1 }}
-    behavior={Platform.OS === "ios" ? "padding" : "height"}
-    keyboardVerticalOffset={
-      Platform.OS === "ios" ? IOS_KEYBOARD_VERTICAL_OFFSET : 0
-    }
-  >
-    <ScrollView
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ flexGrow: 1 }}
       keyboardShouldPersistTaps="handled"
+      enableOnAndroid
+      enableAutomaticScroll
+      extraScrollHeight={64}
     >
       {children}
-    </ScrollView>
-  </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
+  </TouchableWithoutFeedback>
 )
