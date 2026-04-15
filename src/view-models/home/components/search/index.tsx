@@ -29,7 +29,10 @@ export const Search = () => {
       <Button
         variant="secondary"
         onPress={() => {
-          openBottomSheet(<Filter />, 1)
+          openBottomSheet({
+            content: <Filter />,
+            config: { snapPoints: ["70%"] },
+          })
         }}
       >
         <Icon name="filter" size={24} color={colors.purple.base} />

@@ -2,23 +2,42 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
   type PropsWithChildren,
   type ReactNode,
 } from "react"
-import { TouchableWithoutFeedback, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet"
-import type { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types"
+import BottomSheet, {
+  BottomSheetBackdrop,
+  type BottomSheetBackdropProps,
+  BottomSheetScrollView,
+} from "@gorhom/bottom-sheet"
 
 import { colors } from "@/shared/theme"
 
+type BottomSheetConfig = {
+  snapPoints?: string[]
+  enablePanDownToClose?: boolean
+}
+
 type BottomSheetContextType = {
-  openBottomSheet: (content: ReactNode, index?: number) => void
+  isOpen: boolean
+  content: ReactNode | null
+  config: BottomSheetConfig
+
+  openBottomSheet: (params: {
+    content: ReactNode
+    config?: BottomSheetConfig
+  }) => void
   closeBottomSheet: () => void
-  bottomSheetRef: React.RefObject<BottomSheetMethods | null>
+}
+
+const DEFAULT_CONFIG: BottomSheetConfig = {
+  snapPoints: ["50%", "90%"],
+  enablePanDownToClose: true,
 }
 
 const BottomSheetContext = createContext<BottomSheetContextType>(
@@ -26,85 +45,100 @@ const BottomSheetContext = createContext<BottomSheetContextType>(
 )
 
 export const BottomSheetProvider = ({ children }: PropsWithChildren) => {
+  const [isOpen, setIsOpen] = useState(false)
   const [content, setContent] = useState<ReactNode | null>(null)
-  const [index, setIndex] = useState(-1) // -1 means closed
+  const [config, setConfig] = useState<BottomSheetConfig>(DEFAULT_CONFIG)
 
   const bottomSheetRef = useRef<BottomSheet>(null)
   const insets = useSafeAreaInsets()
 
   // Snap points memoizados
-  const snapPoints = useMemo(() => ["50%", "70%", "90%"], [])
+  const snapPoints = useMemo(
+    () => config?.snapPoints || DEFAULT_CONFIG.snapPoints,
+    [config?.snapPoints]
+  )
 
-  const openBottomSheet = useCallback((newContent: ReactNode, newIndex = 1) => {
-    setContent(newContent)
-    setIndex(newIndex)
-
-    requestAnimationFrame(() => {
-      bottomSheetRef.current?.snapToIndex(newIndex)
-    })
-  }, [])
+  const openBottomSheet = useCallback(
+    ({
+      content: newContent,
+      config: newConfig,
+    }: {
+      content: ReactNode
+      config?: BottomSheetConfig
+    }) => {
+      setIsOpen(true)
+      setContent(newContent)
+      setConfig((prevConfig) => ({ ...prevConfig, ...newConfig }))
+    },
+    []
+  )
 
   const closeBottomSheet = useCallback(() => {
-    setIndex(-1)
+    setIsOpen(false)
     setContent(null)
-
-    bottomSheetRef.current?.close()
+    setConfig(DEFAULT_CONFIG)
   }, [])
 
-  const onChange = useCallback(
-    (newIndex: number) => {
-      if (newIndex === -1) {
+  const handleSheetChanges = useCallback(
+    (index: number) => {
+      if (index === -1) {
         closeBottomSheet()
       }
     },
     [closeBottomSheet]
   )
 
-  const isOpen = index >= 0
+  const renderBackdrop = useCallback(
+    (props: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        opacity={0.7}
+        pressBehavior="close"
+      />
+    ),
+    []
+  )
+
+  useEffect(() => {
+    if (isOpen && content) {
+      bottomSheetRef.current?.snapToIndex(0) // Open the bottom sheet in the initial position of the first snap point configured
+    } else {
+      bottomSheetRef.current?.close() // Close the bottom sheet when isOpen becomes false or content is null
+    }
+  }, [isOpen, content])
 
   return (
     <BottomSheetContext.Provider
       value={{
+        isOpen,
+        content,
+        config,
         openBottomSheet,
         closeBottomSheet,
-        bottomSheetRef,
       }}
     >
       {children}
 
-      {isOpen && (
-        <TouchableWithoutFeedback onPress={closeBottomSheet}>
-          <View
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundColor: "rgba(0, 0, 0, 0.2)",
-            }}
-          />
-        </TouchableWithoutFeedback>
-      )}
-
       <BottomSheet
         ref={bottomSheetRef}
-        index={index}
-        onChange={onChange}
+        backdropComponent={renderBackdrop}
         snapPoints={snapPoints}
-        enablePanDownToClose
-        // Android keyboard behavior
-        keyboardBehavior="extend"
-        keyboardBlurBehavior="restore"
-        android_keyboardInputMode="adjustResize"
         backgroundStyle={{
           backgroundColor: colors.white,
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
-          elevation: 8,
         }}
         handleIndicatorStyle={{
           backgroundColor: colors.gray[300],
           width: 50,
           height: 4,
         }}
+        enablePanDownToClose={config?.enablePanDownToClose}
+        index={-1} // Start closed
+        animateOnMount
+        onChange={handleSheetChanges}
       >
         <BottomSheetScrollView
           contentContainerStyle={{

@@ -67,7 +67,12 @@ export const ServicesSection = ({ services }: ServicesSectionProps) => {
 
         <Button
           variant="secondary"
-          onPress={() => openBottomSheet(<AddEditService />, 1)}
+          onPress={() =>
+            openBottomSheet({
+              content: <AddEditService />,
+              config: { snapPoints: ["70%"] },
+            })
+          }
         >
           <Icon name="plus" size={24} color={colors.purple.base} />
           <ButtonText variant="secondary">Adicionar serviço</ButtonText>

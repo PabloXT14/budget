@@ -20,7 +20,7 @@ export const Header = () => {
 
       {/* TITLE */}
       <View style={styles.info}>
-        <Text style={styles.title}>Orçamento</Text>
+        <Text style={styles.title}>Editar orçamento</Text>
       </View>
     </View>
   )
