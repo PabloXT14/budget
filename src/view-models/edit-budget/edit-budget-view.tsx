@@ -7,7 +7,7 @@ import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 import { Header } from "./components/header"
 import { Info } from "./components/info"
 import { StatusSection } from "./components/status-section"
-import { ServicesSection } from "./components/services-section"
+import { BudgetItemsSection } from "./components/budget-items-section"
 import { PriceSection } from "./components/price-section"
 import { Footer } from "./components/footer"
 
@@ -27,7 +27,7 @@ export const EditBudgetView = ({ budget }: EditBudgetViewProps) => {
 
           <StatusSection status={budget.status} />
 
-          <ServicesSection services={budget.items} />
+          <BudgetItemsSection items={budget.items} />
 
           <PriceSection
             services={budget.items}

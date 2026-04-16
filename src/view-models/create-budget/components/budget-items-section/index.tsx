@@ -12,13 +12,13 @@ import { useBottomSheet } from "@/shared/contexts/bottom-sheet.context"
 import type { BudgetItem } from "@/shared/types/budget"
 import { AddEditService } from "@/shared/components/add-edit-service"
 
-type ServicesSectionProps = {
-  services?: BudgetItem[]
+type BudgetItemsSectionProps = {
+  items?: BudgetItem[]
 }
 
 const CENTS_TO_CURRENCY = 100
 
-export const ServicesSection = ({ services }: ServicesSectionProps) => {
+export const BudgetItemsSection = ({ items }: BudgetItemsSectionProps) => {
   const { openBottomSheet } = useBottomSheet()
 
   return (
@@ -32,7 +32,7 @@ export const ServicesSection = ({ services }: ServicesSectionProps) => {
 
       {/* CONTENT */}
       <View style={styles.content}>
-        {services?.map((item) => {
+        {items?.map((item) => {
           const totalItemPrice =
             (item.unitPriceInCents * item.quantity) / CENTS_TO_CURRENCY
 
