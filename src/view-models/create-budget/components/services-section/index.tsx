@@ -10,7 +10,7 @@ import { Button, ButtonText } from "@/shared/components/button"
 import { useBottomSheet } from "@/shared/contexts/bottom-sheet.context"
 
 import type { BudgetItem } from "@/shared/types/budget"
-import { AddEditService } from "../add-edit-service"
+import { AddEditService } from "@/shared/components/add-edit-service"
 
 type ServicesSectionProps = {
   services?: BudgetItem[]
