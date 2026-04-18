@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Text, View } from "react-native"
 
-import { formatPrice } from "@/shared/utils/format-price"
+import { formatPriceFromCents } from "@/shared/utils/format-price"
 import { colors } from "@/shared/theme"
 import { styles } from "./styles"
 
@@ -15,7 +15,6 @@ type PriceSectionProps = {
   discountPercentage?: number
 }
 
-const CENTS_TO_CURRENCY = 100
 const PERCENTAGE_TO_NUMBER = 100
 
 export const PriceSection = ({
@@ -26,19 +25,19 @@ export const PriceSection = ({
     discountPercentage * PERCENTAGE_TO_NUMBER
   )
 
-  const subtotal = services.reduce(
-    (acc, item) =>
-      acc + (item.quantity * item.unitPriceInCents) / CENTS_TO_CURRENCY,
+  const subtotalInCents = services.reduce(
+    (acc, item) => acc + item.quantity * item.unitPriceInCents,
     0
   )
 
-  const discount = subtotal * (discountInput / PERCENTAGE_TO_NUMBER)
+  const discountInCents =
+    subtotalInCents * (discountInput / PERCENTAGE_TO_NUMBER)
 
-  const total = subtotal - discount
+  const totalInCents = subtotalInCents - discountInCents
 
-  const formattedSubtotal = formatPrice({ price: subtotal, showSymbol: false })
-  const formattedDiscount = formatPrice({ price: discount, showSymbol: false })
-  const formattedTotal = formatPrice({ price: total, showSymbol: false })
+  const formattedSubtotal = formatPriceFromCents({ price: subtotalInCents })
+  const formattedDiscount = formatPriceFromCents({ price: discountInCents })
+  const formattedTotal = formatPriceFromCents({ price: totalInCents })
 
   return (
     <View style={styles.container}>
@@ -92,7 +91,7 @@ export const PriceSection = ({
         <Text style={styles.footerTitle}>Valor total</Text>
 
         <View style={styles.footerValue}>
-          {discount > 0 && (
+          {discountInCents > 0 && (
             <Text style={styles.priceWithoutDiscount}>
               R$ {formattedSubtotal}
             </Text>

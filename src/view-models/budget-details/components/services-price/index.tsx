@@ -1,6 +1,6 @@
 import { Text, View } from "react-native"
 
-import { formatPrice } from "@/shared/utils/format-price"
+import { formatPriceFromCents } from "@/shared/utils/format-price"
 import { colors } from "@/shared/theme"
 import { styles } from "./styles"
 
@@ -13,22 +13,20 @@ type ServicesPriceProps = {
   discountPercentage?: number
 }
 
-const CENTS_TO_CURRENCY = 100
 const PERCENT_MULTIPLIER = 100
 
 export const ServicesPrice = ({
   items,
   discountPercentage = 0,
 }: ServicesPriceProps) => {
-  const subtotal = items.reduce(
-    (acc, item) =>
-      acc + (item.quantity * item.unitPriceInCents) / CENTS_TO_CURRENCY,
+  const subtotalInCents = items.reduce(
+    (acc, item) => acc + item.quantity * item.unitPriceInCents,
     0
   )
 
-  const discount = subtotal * discountPercentage
+  const discountInCents = subtotalInCents * discountPercentage
 
-  const total = subtotal - discount
+  const totalInCents = subtotalInCents - discountInCents
 
   return (
     <View style={styles.container}>
@@ -43,7 +41,10 @@ export const ServicesPrice = ({
           <View style={styles.subtotal}>
             <Text style={styles.subtotalLabel}>Subtotal</Text>
             <Text style={styles.subtotalValue}>
-              {formatPrice({ price: subtotal })}
+              {formatPriceFromCents({
+                price: subtotalInCents,
+                showSymbol: true,
+              })}
             </Text>
           </View>
 
@@ -60,7 +61,11 @@ export const ServicesPrice = ({
             </View>
 
             <Text style={styles.discountValue}>
-              - {formatPrice({ price: discount })}
+              -{" "}
+              {formatPriceFromCents({
+                price: discountInCents,
+                showSymbol: true,
+              })}
             </Text>
           </View>
         </View>
@@ -73,7 +78,7 @@ export const ServicesPrice = ({
           <View style={styles.total}>
             <Text style={styles.currency}>R$</Text>
             <Text style={styles.price}>
-              {formatPrice({ price: total, showSymbol: false })}
+              {formatPriceFromCents({ price: totalInCents })}
             </Text>
           </View>
         </View>

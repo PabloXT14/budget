@@ -6,7 +6,7 @@ import {
 } from "react-native"
 import { type NavigationProp, useNavigation } from "@react-navigation/native"
 
-import { formatPrice } from "@/shared/utils/format-price"
+import { formatPriceFromCents } from "@/shared/utils/format-price"
 import { styles } from "./styles"
 
 import { Status } from "@/shared/components/status"
@@ -14,23 +14,20 @@ import { Status } from "@/shared/components/status"
 import type { Budget } from "@/shared/types/budget"
 import type { AppRoutesList } from "@/navigation/app-routes"
 
-const CENTS_TO_CURRENCY = 100
-
 type BudgetCardProps = TouchableOpacityProps & {
   data: Budget
 }
 export const BudgetCard = ({ data, style, ...rest }: BudgetCardProps) => {
   const navigation = useNavigation<NavigationProp<AppRoutesList>>()
 
-  const totalPrice = data.items.reduce(
-    (acc, item) =>
-      acc + (item.quantity * item.unitPriceInCents) / CENTS_TO_CURRENCY,
+  const totalPriceInCents = data.items.reduce(
+    (acc, item) => acc + item.quantity * item.unitPriceInCents,
     0
   )
 
   const totalPriceWithDiscount = data.discountPercentage
-    ? totalPrice - totalPrice * data.discountPercentage
-    : totalPrice
+    ? totalPriceInCents - totalPriceInCents * data.discountPercentage
+    : totalPriceInCents
 
   return (
     <TouchableOpacity
@@ -60,7 +57,9 @@ export const BudgetCard = ({ data, style, ...rest }: BudgetCardProps) => {
         <View style={styles.price}>
           <Text style={styles.priceCurrency}>R$</Text>
           <Text style={styles.priceValue} numberOfLines={1}>
-            {formatPrice({ price: totalPriceWithDiscount, showSymbol: false })}
+            {formatPriceFromCents({
+              price: totalPriceWithDiscount,
+            })}
           </Text>
         </View>
       </View>

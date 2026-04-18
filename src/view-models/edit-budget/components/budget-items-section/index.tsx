@@ -1,22 +1,20 @@
-import { Text, TouchableOpacity, View } from "react-native"
+import { Text, View } from "react-native"
 
-import { formatPrice } from "@/shared/utils/format-price"
 import { colors } from "@/shared/theme"
 import { styles } from "./styles"
 
 import { Icon } from "@/shared/components/icon"
 import { Button, ButtonText } from "@/shared/components/button"
+import { Item } from "./components/item"
+import { AddEditService } from "@/shared/components/add-edit-service"
 
 import { useBottomSheet } from "@/shared/contexts/bottom-sheet.context"
 
 import type { BudgetItem } from "@/shared/types/budget"
-import { AddEditService } from "@/shared/components/add-edit-service"
 
 type BudgetItemsSectionProps = {
   items?: BudgetItem[]
 }
-
-const CENTS_TO_CURRENCY = 100
 
 export const BudgetItemsSection = ({ items }: BudgetItemsSectionProps) => {
   const { openBottomSheet } = useBottomSheet()
@@ -32,38 +30,9 @@ export const BudgetItemsSection = ({ items }: BudgetItemsSectionProps) => {
 
       {/* CONTENT */}
       <View style={styles.content}>
-        {items?.map((item) => {
-          const totalItemPrice =
-            (item.unitPriceInCents * item.quantity) / CENTS_TO_CURRENCY
-
-          return (
-            <View key={item.id} style={styles.item}>
-              <View style={styles.info}>
-                <Text style={styles.infoTitle} numberOfLines={1}>
-                  {item.title}
-                </Text>
-                <Text style={styles.infoDescription} numberOfLines={1}>
-                  {item.description}
-                </Text>
-              </View>
-
-              <View style={styles.price}>
-                <View style={styles.priceValue}>
-                  <Text style={styles.currency}>R$</Text>
-                  <Text style={styles.value}>
-                    {formatPrice({ price: totalItemPrice, showSymbol: false })}
-                  </Text>
-                </View>
-
-                <Text style={styles.quantity}>Qt: {item.quantity}</Text>
-              </View>
-
-              <TouchableOpacity activeOpacity={0.6}>
-                <Icon name="editPen" size={20} color={colors.purple.base} />
-              </TouchableOpacity>
-            </View>
-          )
-        })}
+        {items?.map((item) => (
+          <Item key={item.id} item={item} />
+        ))}
 
         <Button
           variant="secondary"
