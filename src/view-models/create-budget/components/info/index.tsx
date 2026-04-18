@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Text, View } from "react-native"
 
 import { colors } from "@/shared/theme"
@@ -13,9 +12,6 @@ type InfoProps = {
 }
 
 export const Info = ({ title, client }: InfoProps) => {
-  const [isTitleFocused, setIsInputFocused] = useState(false)
-  const [isClientFocused, setIsClientFocused] = useState(false)
-
   return (
     <View style={styles.container}>
       {/* HEADER */}
@@ -27,20 +23,12 @@ export const Info = ({ title, client }: InfoProps) => {
 
       {/* CONTENT */}
       <View style={styles.content}>
-        <Input.Container isFocused={isTitleFocused}>
-          <Input.Field
-            placeholder="Título"
-            defaultValue={title}
-            onFocusChange={setIsInputFocused}
-          />
+        <Input.Container>
+          <Input.Field placeholder="Título" defaultValue={title} />
         </Input.Container>
 
-        <Input.Container isFocused={isClientFocused}>
-          <Input.Field
-            placeholder="Cliente"
-            defaultValue={client}
-            onFocusChange={setIsClientFocused}
-          />
+        <Input.Container>
+          <Input.Field placeholder="Cliente" defaultValue={client} />
         </Input.Container>
       </View>
     </View>

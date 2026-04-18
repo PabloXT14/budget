@@ -14,9 +14,6 @@ import { useBottomSheet } from "@/shared/contexts/bottom-sheet.context"
 export const AddEditService = () => {
   const { closeBottomSheet } = useBottomSheet()
 
-  const [isTitleFocused, setIsTitleFocused] = useState(false)
-  const [isDescriptionFocused, setIsDescriptionFocused] = useState(false)
-  const [isPriceFocused, setIsPriceFocused] = useState(false)
   const [quantity, setQuantity] = useState(1)
 
   return (
@@ -33,22 +30,17 @@ export const AddEditService = () => {
 
         {/* CONTENT */}
         <View style={styles.content}>
-          <Input.Container isFocused={isTitleFocused}>
-            <Input.Field
-              placeholder="Título do serviço"
-              onFocusChange={setIsTitleFocused}
-            />
+          <Input.Container>
+            <Input.Field placeholder="Título do serviço" />
           </Input.Container>
 
           <Input.Container
             style={{ height: 120, borderRadius: 20, alignItems: "flex-start" }}
-            isFocused={isDescriptionFocused}
           >
             <Input.Field
               placeholder="Descrição do serviço"
               multiline
               numberOfLines={5}
-              onFocusChange={setIsDescriptionFocused}
               style={{
                 textAlignVertical: "top",
                 height: "100%",
@@ -58,13 +50,9 @@ export const AddEditService = () => {
 
           {/* PRICE & QUANTITY */}
           <View style={{ gap: 8, flexDirection: "row", alignItems: "center" }}>
-            <Input.Container style={{ flex: 1 }} isFocused={isPriceFocused}>
-              <Input.Label isFocused={isPriceFocused}>R$</Input.Label>
-              <Input.Field
-                keyboardType="numeric"
-                placeholder="0,00"
-                onFocusChange={setIsPriceFocused}
-              />
+            <Input.Container style={{ flex: 1 }}>
+              <Input.Label>R$</Input.Label>
+              <Input.Field keyboardType="numeric" placeholder="0,00" />
             </Input.Container>
 
             <Input.Container

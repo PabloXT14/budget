@@ -13,10 +13,8 @@ type InfoProps = {
 }
 
 export const Info = ({ title, client }: InfoProps) => {
-  const [isTitleFocused, setIsInputFocused] = useState(false)
   const [titleSelection, setTitleSelection] = useState({ start: 0, end: 0 })
 
-  const [isClientFocused, setIsClientFocused] = useState(false)
   const [clientSelection, setClientSelection] = useState({ start: 0, end: 0 })
 
   return (
@@ -30,11 +28,10 @@ export const Info = ({ title, client }: InfoProps) => {
 
       {/* CONTENT */}
       <View style={styles.content}>
-        <Input.Container isFocused={isTitleFocused}>
+        <Input.Container>
           <Input.Field
             placeholder="Título"
             defaultValue={title}
-            onFocusChange={setIsInputFocused}
             selection={titleSelection}
             onSelectionChange={(e) =>
               setTitleSelection(e.nativeEvent.selection)
@@ -42,11 +39,10 @@ export const Info = ({ title, client }: InfoProps) => {
           />
         </Input.Container>
 
-        <Input.Container isFocused={isClientFocused}>
+        <Input.Container>
           <Input.Field
             placeholder="Cliente"
             defaultValue={client}
-            onFocusChange={setIsClientFocused}
             selection={clientSelection}
             onSelectionChange={(e) =>
               setClientSelection(e.nativeEvent.selection)
