@@ -15,7 +15,11 @@ import type { useCreateBudgetViewModel } from "./use-create-budget-view-model"
 
 type CreateBudgetViewProps = ReturnType<typeof useCreateBudgetViewModel>
 
-export const CreateBudgetView = ({ newBudget }: CreateBudgetViewProps) => {
+export const CreateBudgetView = ({
+  newBudget,
+  handleOpenEditBudgetItem,
+  handleOpenEditBudgetItemWithData,
+}: CreateBudgetViewProps) => {
   return (
     <SafeAreaView style={styles.container}>
       <DismissKeyboardView>
@@ -27,7 +31,19 @@ export const CreateBudgetView = ({ newBudget }: CreateBudgetViewProps) => {
 
           <StatusSection status={newBudget.status} />
 
-          <BudgetItemsSection items={newBudget.items} />
+          <BudgetItemsSection
+            items={[
+              {
+                id: "1",
+                title: "Serviço 1",
+                description: "Descrição do serviço 1",
+                quantity: 2,
+                unitPriceInCents: 5000,
+              },
+            ]}
+            onEditItem={handleOpenEditBudgetItem}
+            onAddItem={handleOpenEditBudgetItemWithData}
+          />
 
           <PriceSection
             services={newBudget.items}

@@ -5,20 +5,21 @@ import { styles } from "./styles"
 
 import { Icon } from "@/shared/components/icon"
 import { Button, ButtonText } from "@/shared/components/button"
-import { AddEditService } from "@/shared/components/add-edit-service"
 import { Item } from "./components/item"
-
-import { useBottomSheet } from "@/shared/contexts/bottom-sheet.context"
 
 import type { BudgetItem } from "@/shared/types/budget"
 
 type BudgetItemsSectionProps = {
   items?: BudgetItem[]
+  onEditItem: (item: BudgetItem) => void
+  onAddItem: () => void
 }
 
-export const BudgetItemsSection = ({ items }: BudgetItemsSectionProps) => {
-  const { openBottomSheet } = useBottomSheet()
-
+export const BudgetItemsSection = ({
+  items,
+  onEditItem,
+  onAddItem,
+}: BudgetItemsSectionProps) => {
   return (
     <View style={styles.container}>
       {/* HEADER */}
@@ -31,18 +32,10 @@ export const BudgetItemsSection = ({ items }: BudgetItemsSectionProps) => {
       {/* CONTENT */}
       <View style={styles.content}>
         {items?.map((item) => (
-          <Item key={item.id} item={item} />
+          <Item key={item.id} item={item} onEdit={() => onEditItem(item)} />
         ))}
 
-        <Button
-          variant="secondary"
-          onPress={() =>
-            openBottomSheet({
-              content: <AddEditService />,
-              config: { snapPoints: ["70%"] },
-            })
-          }
-        >
+        <Button variant="secondary" onPress={() => onAddItem()}>
           <Icon name="plus" size={24} color={colors.purple.base} />
           <ButtonText variant="secondary">Adicionar serviço</ButtonText>
         </Button>

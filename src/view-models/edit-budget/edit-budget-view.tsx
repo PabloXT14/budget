@@ -15,7 +15,11 @@ import type { useEditBudgetViewModel } from "./use-edit-budget-view-model"
 
 type EditBudgetViewProps = ReturnType<typeof useEditBudgetViewModel>
 
-export const EditBudgetView = ({ budget }: EditBudgetViewProps) => {
+export const EditBudgetView = ({
+  budget,
+  handleOpenEditBudgetItem,
+  handleOpenEditBudgetItemWithData,
+}: EditBudgetViewProps) => {
   return (
     <SafeAreaView style={styles.container}>
       <DismissKeyboardView>
@@ -27,7 +31,11 @@ export const EditBudgetView = ({ budget }: EditBudgetViewProps) => {
 
           <StatusSection status={budget.status} />
 
-          <BudgetItemsSection items={budget.items} />
+          <BudgetItemsSection
+            items={budget.items}
+            onEditItem={handleOpenEditBudgetItem}
+            onAddItem={handleOpenEditBudgetItemWithData}
+          />
 
           <PriceSection
             services={budget.items}
