@@ -1,6 +1,6 @@
 import z from "zod"
 
-import { BudgetStatus } from "@/shared/types/budget"
+import { QuoteStatus } from "@/shared/interfaces/quote"
 
 export enum OrderBy {
   "most-recent" = "Mais recente",
@@ -10,9 +10,7 @@ export enum OrderBy {
 }
 
 export const filterFormSchema = z.object({
-  status: z
-    .array(z.enum(BudgetStatus))
-    .min(1, "Selecione pelo menos um status"),
+  status: z.array(z.enum(QuoteStatus)).min(1, "Selecione pelo menos um status"),
   orderBy: z.enum(OrderBy),
 })
 

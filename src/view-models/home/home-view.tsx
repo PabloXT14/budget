@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 
 import { Header } from "./components/header"
 import { Search } from "./components/search"
-import { BudgetList } from "./components/budget-list"
+import { QuotesList } from "./components/quotes-list"
 
 import { colors } from "@/shared/theme"
 
@@ -18,7 +18,7 @@ export const HomeView = (_props: HomeViewProps) => (
     <View style={styles.content}>
       <Search />
 
-      <BudgetList />
+      <QuotesList />
     </View>
   </SafeAreaView>
 )

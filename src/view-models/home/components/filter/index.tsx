@@ -8,7 +8,7 @@ import { filterFormSchema, OrderBy, type FilterFormData } from "./schema"
 import { styles } from "./styles"
 import { colors } from "@/shared/theme"
 
-import { BudgetStatus } from "@/shared/types/budget"
+import { QuoteStatus } from "@/shared/interfaces/quote"
 
 import { Icon } from "@/shared/components/icon"
 import { Checkbox } from "@/shared/components/checkbox"
@@ -38,8 +38,8 @@ export const Filter = () => {
   }
 
   const handleToggleStatus = (
-    status: BudgetStatus,
-    field: { value: BudgetStatus[]; onChange: (value: BudgetStatus[]) => void }
+    status: QuoteStatus,
+    field: { value: QuoteStatus[]; onChange: (value: QuoteStatus[]) => void }
   ) => {
     if (field.value.includes(status)) {
       field.onChange(field.value.filter((item) => item !== status))
@@ -77,7 +77,7 @@ export const Filter = () => {
               <Text style={styles.sectionTitle}>Status</Text>
 
               <View style={styles.list}>
-                {Object.values(BudgetStatus).map((status) => (
+                {Object.values(QuoteStatus).map((status) => (
                   <TouchableOpacity
                     style={styles.option}
                     key={status}

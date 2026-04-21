@@ -2,10 +2,10 @@ import { Text, View } from "react-native"
 
 import { getStatusStyles, getIndicatorStyles, getTextStyles } from "./styles"
 
-import type { BudgetStatus } from "@/shared/types/budget"
+import type { QuoteStatus } from "@/shared/interfaces/quote"
 
 type StatusProps = {
-  variant: BudgetStatus
+  variant: QuoteStatus
 }
 
 export const Status = ({ variant }: StatusProps) => (

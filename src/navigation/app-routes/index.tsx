@@ -4,18 +4,18 @@ import {
 } from "@react-navigation/stack"
 
 import { Home } from "@/view-models/home"
-import { CreateBudget } from "@/view-models/create-budget"
-import { EditBudget } from "@/view-models/edit-budget"
-import { BudgetDetails } from "@/view-models/budget-details"
+import { CreateQuote } from "@/view-models/create-quote"
+import { EditQuote } from "@/view-models/edit-quote"
+import { QuoteDetails } from "@/view-models/quote-details"
 
 export type AppRoutesList = {
   home: undefined
-  createBudget: undefined
-  editBudget: {
-    budgetId: string
+  createQuote: undefined
+  editQuote: {
+    quoteId: string
   }
-  budgetDetails: {
-    budgetId: string
+  quoteDetails: {
+    quoteId: string
   }
 }
 
@@ -32,8 +32,8 @@ export const AppRoutes = () => (
     screenOptions={{ headerShown: false, animation: "slide_from_right" }}
   >
     <Screen name="home" component={Home} />
-    <Screen name="createBudget" component={CreateBudget} />
-    <Screen name="editBudget" component={EditBudget} />
-    <Screen name="budgetDetails" component={BudgetDetails} />
+    <Screen name="createQuote" component={CreateQuote} />
+    <Screen name="editQuote" component={EditQuote} />
+    <Screen name="quoteDetails" component={QuoteDetails} />
   </Navigator>
 )

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native"
 
 import { colors, typography } from "@/shared/theme"
 
-import { BudgetStatus } from "@/shared/types/budget"
+import { QuoteStatus } from "@/shared/interfaces/quote"
 
 export const styles = StyleSheet.create({
   base: {
@@ -79,32 +79,32 @@ export const styles = StyleSheet.create({
   },
 })
 
-export function getStatusStyles(status: BudgetStatus) {
+export function getStatusStyles(status: QuoteStatus) {
   return [
     styles.base,
-    status === BudgetStatus.SENT && styles.sent,
-    status === BudgetStatus.DRAFT && styles.draft,
-    status === BudgetStatus.APPROVED && styles.approved,
-    status === BudgetStatus.REJECTED && styles.reject,
+    status === QuoteStatus.SENT && styles.sent,
+    status === QuoteStatus.DRAFT && styles.draft,
+    status === QuoteStatus.APPROVED && styles.approved,
+    status === QuoteStatus.REJECTED && styles.reject,
   ]
 }
 
-export function getIndicatorStyles(status: BudgetStatus) {
+export function getIndicatorStyles(status: QuoteStatus) {
   return [
     styles.indicatorBase,
-    status === BudgetStatus.SENT && styles.indicatorSent,
-    status === BudgetStatus.DRAFT && styles.indicatorDraft,
-    status === BudgetStatus.APPROVED && styles.indicatorApproved,
-    status === BudgetStatus.REJECTED && styles.indicatorReject,
+    status === QuoteStatus.SENT && styles.indicatorSent,
+    status === QuoteStatus.DRAFT && styles.indicatorDraft,
+    status === QuoteStatus.APPROVED && styles.indicatorApproved,
+    status === QuoteStatus.REJECTED && styles.indicatorReject,
   ]
 }
 
-export function getTextStyles(status: BudgetStatus) {
+export function getTextStyles(status: QuoteStatus) {
   return [
     styles.textBase,
-    status === BudgetStatus.SENT && styles.textSent,
-    status === BudgetStatus.DRAFT && styles.textDraft,
-    status === BudgetStatus.APPROVED && styles.textApproved,
-    status === BudgetStatus.REJECTED && styles.textReject,
+    status === QuoteStatus.SENT && styles.textSent,
+    status === QuoteStatus.DRAFT && styles.textDraft,
+    status === QuoteStatus.APPROVED && styles.textApproved,
+    status === QuoteStatus.REJECTED && styles.textReject,
   ]
 }
