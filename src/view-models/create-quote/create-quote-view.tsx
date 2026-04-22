@@ -22,9 +22,9 @@ export const CreateQuoteView = ({
 }: CreateQuoteViewProps) => {
   return (
     <SafeAreaView style={styles.container}>
-      <DismissKeyboardView>
-        <Header />
+      <Header />
 
+      <DismissKeyboardView>
         {/* CONTENT */}
         <View style={styles.content}>
           <Info title={newQuote.title} client={newQuote.customer.name} />
@@ -50,9 +50,9 @@ export const CreateQuoteView = ({
             discountPercentage={newQuote.discountPercentage}
           />
         </View>
-
-        <Footer />
       </DismissKeyboardView>
+
+      <Footer />
     </SafeAreaView>
   )
 }

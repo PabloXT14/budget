@@ -26,9 +26,9 @@ export const EditQuoteView = ({
 
   return (
     <SafeAreaView style={styles.container}>
-      <DismissKeyboardView>
-        <Header />
+      <Header />
 
+      <DismissKeyboardView>
         {/* CONTENT */}
         <View style={styles.content}>
           <Info title={quote.title} client={quote.customer.name} />
@@ -46,9 +46,9 @@ export const EditQuoteView = ({
             discountPercentage={quote.discountPercentage}
           />
         </View>
-
-        <Footer />
       </DismissKeyboardView>
+
+      <Footer />
     </SafeAreaView>
   )
 }
