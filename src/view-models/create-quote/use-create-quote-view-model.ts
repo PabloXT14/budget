@@ -35,7 +35,7 @@ export const useCreateQuoteViewModel = (_props: CreateQuoteViewModel) => {
     openBottomSheet({
       content: createElement(AddEditQuoteItem, { quoteItem }),
       config: {
-        snapPoints: ["70%"],
+        snapPoints: ["90%"],
       },
     })
   }
@@ -44,7 +44,7 @@ export const useCreateQuoteViewModel = (_props: CreateQuoteViewModel) => {
     openBottomSheet({
       content: createElement(AddEditQuoteItem),
       config: {
-        snapPoints: ["70%"],
+        snapPoints: ["90%"],
       },
     })
   }

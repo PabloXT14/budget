@@ -20,7 +20,7 @@ export const useEditQuoteViewModel = ({ quoteId }: EditQuoteViewModel) => {
     openBottomSheet({
       content: createElement(AddEditQuoteItem, { quoteItem }),
       config: {
-        snapPoints: ["70%"],
+        snapPoints: ["90%"],
       },
     })
   }
@@ -29,7 +29,7 @@ export const useEditQuoteViewModel = ({ quoteId }: EditQuoteViewModel) => {
     openBottomSheet({
       content: createElement(AddEditQuoteItem),
       config: {
-        snapPoints: ["70%"],
+        snapPoints: ["90%"],
       },
     })
   }
