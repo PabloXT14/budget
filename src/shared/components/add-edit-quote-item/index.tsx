@@ -7,11 +7,12 @@ import { colors } from "@/shared/theme"
 import { Icon } from "@/shared/components/icon"
 import { Input } from "@/shared/components/input"
 import { Button, ButtonText } from "@/shared/components/button"
-import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 
 import { useBottomSheet } from "@/shared/contexts/bottom-sheet.context"
 
 import type { QuoteItem } from "@/shared/interfaces/quote"
+import { formatPriceFromCents } from "@/shared/utils/format-price"
+import { DismissKeyboardView } from "../dismiss-keyboard-view"
 
 type AddEditQuoteItemProps = {
   quoteItem?: QuoteItem | null
@@ -19,7 +20,7 @@ type AddEditQuoteItemProps = {
   onDelete?: () => void
 }
 
-const CENTS_TO_CURRENCY = 100
+// const CENTS_TO_CURRENCY = 100
 
 export const AddEditQuoteItem = ({
   quoteItem = null,
@@ -30,11 +31,19 @@ export const AddEditQuoteItem = ({
 
   const [title, setTitle] = useState(quoteItem?.title || "")
   const [description, setDescription] = useState(quoteItem?.description || "")
-  const [price, setPrice] = useState(
-    (quoteItem?.unitPriceInCents || 0) / CENTS_TO_CURRENCY
-  )
+  const [price, setPrice] = useState(quoteItem?.unitPriceInCents || 0)
 
   const [quantity, setQuantity] = useState(quoteItem?.quantity || 1)
+
+  const handleChangePrice = (text: string) => {
+    // remove tudo que não for número
+    const onlyNumbers = text.replace(/\D/g, "")
+
+    // converte para número (centavos)
+    const value = Number(onlyNumbers)
+
+    setPrice(value)
+  }
 
   return (
     <DismissKeyboardView>
@@ -78,11 +87,12 @@ export const AddEditQuoteItem = ({
           <View style={{ gap: 8, flexDirection: "row", alignItems: "center" }}>
             <Input.Container style={{ flex: 1 }}>
               <Input.Label>R$</Input.Label>
+
               <Input.Field
                 keyboardType="numeric"
                 placeholder="0,00"
-                value={price.toString()}
-                onChangeText={(text) => setPrice(Number(text) || 0)}
+                value={formatPriceFromCents({ price })}
+                onChangeText={handleChangePrice}
               />
             </Input.Container>
 
